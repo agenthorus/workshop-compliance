@@ -65,7 +65,7 @@ Take some time to familiarize yourself with the code for each role and check the
 
 # Accessing AAP
 
-login to `https://aap-aap.apps.cluster-6x92h-1.dynamic.redhatworkshops.io/` and enter your login credentials
+login to `ec2-3-26-46-51.ap-southeast-2.compute.amazonaws.com` and enter your login credentials
 
 There are a number of constructs in the Automation Controller UI that enable multi-tenancy, notifications, scheduling, etc. However, we are only going to focus on a few of the key constructs that are required for this workshop today.
 
