@@ -86,7 +86,7 @@ There are a number of constructs in the Automation Controller UI that enable mul
 
 In order to create a project and connections to remote clients, we need to create a set of credentials
 
-### Create a Machine Credential
+### Create a Machine Credential (Already Created)
 
 Credentials are utilized by Controller for authentication when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.
 
