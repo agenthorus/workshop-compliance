@@ -279,11 +279,6 @@ then Click ADD and select **Add Job Template**
 Survey
 | Question	 |  Answer variable name| Answer Type | Multiple Choice Options |
 |----------|----------|----------|--------------|
-| Compliance Profile ?| compliance_profile_id | Multiple Choice (Single Selection) | CIS and E8 |  |
-
-Survey
-| Question	 |  Answer variable name| Answer Type | Multiple Choice Options |
-|----------|----------|----------|--------------|
 | Compliance Profile ?| compliance_profile_id | Multiple Choice (Single Selection) | CIS <br> E8 |  |
 
 
