@@ -69,7 +69,7 @@ Take some time to familiarize yourself with the code for each role and check the
 
 # Accessing AAP
 
-login to `https://aapcontroller-aap.apps.cluster-9s6m5.9s6m5.sandbox2962.opentlc.com` and enter your login credentials
+login to `ec2-3-26-46-51.ap-southeast-2.compute.amazonaws.com` and enter your login credentials
 
 There are a number of constructs in the Automation Controller UI that enable multi-tenancy, notifications, scheduling, etc. However, we are only going to focus on a few of the key constructs that are required for this workshop today.
 
