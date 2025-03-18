@@ -69,7 +69,7 @@ Take some time to familiarize yourself with the code for each role and check the
 
 # Accessing AAP
 
-login to `https://3.107.75.203/` and enter your login credentials
+login to `https://3.107.249.98` and enter your login credentials
 
 There are a number of constructs in the Automation Controller UI that enable multi-tenancy, notifications, scheduling, etc. However, we are only going to focus on a few of the key constructs that are required for this workshop today.
 
