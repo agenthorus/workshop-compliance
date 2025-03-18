@@ -65,7 +65,7 @@ Take some time to familiarize yourself with the code for each role and check the
 
 # Accessing AAP
 
-login to `ec2-3-26-46-51.ap-southeast-2.compute.amazonaws.com` and enter your login credentials
+login to `https://3.107.75.203` and enter your login credentials
 
 There are a number of constructs in the Automation Controller UI that enable multi-tenancy, notifications, scheduling, etc. However, we are only going to focus on a few of the key constructs that are required for this workshop today.
 
@@ -305,7 +305,7 @@ the report will be the something similar to the following:
 copy the `html` report local to your workstation 
 
 ```bash
-scp -P 22 <username>@bastion.9s6m5.sandbox2962.opentlc.com:/home/lab-user/windows-cis-report-preharden.html.html .
+scp -P 22 <username>@Bastion:/home/*<studentID>*/windows-cis-report-preharden.html.html .
 ```
 
 and inspect the report 
