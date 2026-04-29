@@ -1,0 +1,13 @@
+---
+- name: Apply CIS Benchmark security/compliance hardenning to the NEW Windows 2016 VM
+  hosts: all
+  collections:
+    - community.general
+    - community.windows
+    - ansible.windows
+
+  tasks:
+
+    - name: Apply Windows 2016 CIS Compliance Hardenning
+      ansible.builtin.import_role:
+        name: win2016-cis

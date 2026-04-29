@@ -1,0 +1,12 @@
+---
+controller_projects:
+  - name: Git Compliance
+    organization: "{{ aap_organizations[0].name }}"
+    scm_branch: main
+    scm_clean: true
+    scm_delete_on_update: false
+    scm_type: git
+    scm_update_on_launch: true
+    scm_url: "{{ v_git_repo_url }}"
+    credential: Git Credentials
+    wait: true

@@ -1,0 +1,79 @@
+---
+rhel8_workflows:
+
+  - name: WF - RHEL 8 Compliance
+    organization: "{{ aap_organizations[0].name }}"
+    description: Pre-Scan -> CIS Harden -> Post-Scan pipeline for RHEL 8
+    labels: [compliance, rhel]
+    survey_enabled: false
+    simplified_workflow_nodes:
+      - identifier: pre-scan
+        unified_job_template: JT - RHEL Scan Pre
+        success_nodes:
+          - harden
+      - identifier: harden
+        unified_job_template: JT - RHEL 8 CIS Harden
+        success_nodes:
+          - post-scan
+      - identifier: post-scan
+        unified_job_template: JT - RHEL Scan Post
+
+rhel9_workflows:
+
+  - name: WF - RHEL 9 Compliance
+    organization: "{{ aap_organizations[0].name }}"
+    description: Pre-Scan -> Harden -> Post-Scan pipeline for RHEL 9
+    labels: [compliance, rhel]
+    survey_enabled: true
+    survey_spec:
+      name: Compliance Profile
+      description: Select the compliance profile for the pipeline
+      spec:
+        - question_name: Compliance Profile
+          question_description: Select the compliance profile
+          variable: compliance_profile_id
+          type: multiplechoice
+          required: true
+          default: CIS
+          choices: "CIS\nE8"
+    simplified_workflow_nodes:
+      - identifier: pre-scan
+        unified_job_template: JT - RHEL Scan Pre
+        success_nodes:
+          - harden
+      - identifier: harden
+        unified_job_template: JT - RHEL 9 Harden
+        success_nodes:
+          - post-scan
+      - identifier: post-scan
+        unified_job_template: JT - RHEL Scan Post
+
+rhel10_workflows:
+
+  - name: WF - RHEL 10 Compliance
+    organization: "{{ aap_organizations[0].name }}"
+    description: Pre-Scan -> Harden -> Post-Scan pipeline for RHEL 10
+    labels: [compliance, rhel]
+    survey_enabled: true
+    survey_spec:
+      name: Compliance Profile
+      description: Select the compliance profile for the pipeline
+      spec:
+        - question_name: Compliance Profile
+          question_description: Select the compliance profile
+          variable: compliance_profile_id
+          type: multiplechoice
+          required: true
+          default: CIS
+          choices: "CIS\nE8"
+    simplified_workflow_nodes:
+      - identifier: pre-scan
+        unified_job_template: JT - RHEL Scan Pre
+        success_nodes:
+          - harden
+      - identifier: harden
+        unified_job_template: JT - RHEL 10 Harden
+        success_nodes:
+          - post-scan
+      - identifier: post-scan
+        unified_job_template: JT - RHEL Scan Post

@@ -1,0 +1,19 @@
+---
+controller_inventories:
+  - name: Workshop RHEL
+    organization: "{{ aap_organizations[0].name }}"
+    description: RHEL servers for compliance scanning and hardening
+    variables:
+      v_report_server: "{{ v_report_server }}"
+      v_report_server_port: "{{ v_report_server_port | default('22') }}"
+      v_report_server_user: "{{ v_report_server_user }}"
+      v_report_server_pass: "{{ v_report_server_pass }}"
+
+  - name: Workshop Windows
+    organization: "{{ aap_organizations[0].name }}"
+    description: Windows servers for CIS compliance hardening
+    variables:
+      ansible_connection: winrm
+      ansible_port: "5986"
+      ansible_winrm_transport: credssp
+      ansible_winrm_server_cert_validation: ignore

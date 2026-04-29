@@ -1,0 +1,10 @@
+---
+controller_labels:
+  - name: compliance
+    organization: "{{ aap_organizations[0].name }}"
+
+  - name: rhel
+    organization: "{{ aap_organizations[0].name }}"
+
+  - name: windows
+    organization: "{{ aap_organizations[0].name }}"

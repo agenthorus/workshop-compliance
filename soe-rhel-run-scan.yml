@@ -1,0 +1,35 @@
+---
+- name: Run OpenSCAP {{ compliance_profile_id | default('CIS') }} compliance scan
+  hosts: all
+  become: true
+  become_method: sudo
+
+  tasks:
+
+    - name: Run Openscap Scan
+      ansible.builtin.include_role:
+        name: openscap-scanner
+      vars:
+        openscap_profile: xccdf_org.ssgproject.content_profile_{{ compliance_profile_id | lower }}
+
+    - name: Fetch report to controller
+      ansible.builtin.fetch:
+        src: "/tmp/oscap-report-{{ ansible_nodename }}-{{ v_stage }}.html"
+        dest: "./oscap-report-{{ ansible_nodename }}-{{ v_stage }}.html"
+        flat: true
+
+    - name: Copy report to report server
+      ansible.builtin.copy:
+        src: "./oscap-report-{{ ansible_nodename }}-{{ v_stage }}.html"
+        dest: "/home/{{ v_report_server_user }}/"
+      delegate_to: "{{ v_report_server }}"
+      vars:
+        ansible_port: "{{ v_report_server_port }}"
+        ansible_user: "{{ v_report_server_user }}"
+        ansible_ssh_pass: "{{ v_report_server_pass }}"
+        ansible_become_pass: "{{ v_report_server_pass }}"
+
+    - name: Clean up local report copy
+      ansible.builtin.file:
+        path: "./oscap-report-{{ ansible_nodename }}-{{ v_stage }}.html"
+        state: absent

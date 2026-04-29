@@ -1,0 +1,179 @@
+---
+# Shared RHEL scan templates (deployed when any RHEL profile is selected)
+rhel_scan_templates:
+
+  - name: JT - RHEL Scan Pre
+    job_type: run
+    inventory: Workshop RHEL
+    project: Git Compliance
+    playbook: soe-rhel-run-scan.yml
+    labels: [compliance, rhel]
+    credentials:
+      - RHEL Credential
+      - Vault Credentials
+    become_enabled: true
+    survey_enabled: true
+    survey_spec:
+      name: Compliance Profile
+      description: Select the compliance profile to scan against
+      spec:
+        - question_name: Compliance Profile
+          question_description: Select the compliance profile
+          variable: compliance_profile_id
+          type: multiplechoice
+          required: true
+          default: CIS
+          choices: "CIS\nE8"
+    extra_vars:
+      v_stage: preharden
+
+  - name: JT - RHEL Scan Post
+    job_type: run
+    inventory: Workshop RHEL
+    project: Git Compliance
+    playbook: soe-rhel-run-scan.yml
+    labels: [compliance, rhel]
+    credentials:
+      - RHEL Credential
+      - Vault Credentials
+    become_enabled: true
+    survey_enabled: true
+    survey_spec:
+      name: Compliance Profile
+      description: Select the compliance profile to scan against
+      spec:
+        - question_name: Compliance Profile
+          question_description: Select the compliance profile
+          variable: compliance_profile_id
+          type: multiplechoice
+          required: true
+          default: CIS
+          choices: "CIS\nE8"
+    extra_vars:
+      v_stage: postharden
+
+# RHEL 8 -- CIS only
+rhel8_templates:
+
+  - name: JT - RHEL 8 CIS Harden
+    job_type: run
+    inventory: Workshop RHEL
+    project: Git Compliance
+    playbook: soe-rhel8-hardenning.yml
+    labels: [compliance, rhel]
+    credentials:
+      - RHEL Credential
+      - Vault Credentials
+    become_enabled: true
+
+# RHEL 9 -- CIS and E8
+rhel9_templates:
+
+  - name: JT - RHEL 9 Harden
+    job_type: run
+    inventory: Workshop RHEL
+    project: Git Compliance
+    playbook: soe-rhel9-hardenning.yml
+    labels: [compliance, rhel]
+    credentials:
+      - RHEL Credential
+      - Vault Credentials
+    become_enabled: true
+    survey_enabled: true
+    survey_spec:
+      name: Compliance Profile
+      description: Select the compliance profile to apply
+      spec:
+        - question_name: Compliance Profile
+          question_description: Select the compliance profile
+          variable: compliance_profile_id
+          type: multiplechoice
+          required: true
+          default: CIS
+          choices: "CIS\nE8"
+
+# RHEL 10 -- CIS and E8
+rhel10_templates:
+
+  - name: JT - RHEL 10 Harden
+    job_type: run
+    inventory: Workshop RHEL
+    project: Git Compliance
+    playbook: soe-rhel10-hardenning.yml
+    labels: [compliance, rhel]
+    credentials:
+      - RHEL Credential
+      - Vault Credentials
+    become_enabled: true
+    survey_enabled: true
+    survey_spec:
+      name: Compliance Profile
+      description: Select the compliance profile to apply
+      spec:
+        - question_name: Compliance Profile
+          question_description: Select the compliance profile
+          variable: compliance_profile_id
+          type: multiplechoice
+          required: true
+          default: CIS
+          choices: "CIS\nE8"
+
+# Windows 2016 -- CIS
+win2016_templates:
+
+  - name: JT - WIN 2016 CIS Harden
+    job_type: run
+    inventory: Workshop Windows
+    project: Git Compliance
+    playbook: soe-win2016-cis-hardenning.yml
+    labels: [compliance, windows]
+    credentials:
+      - Windows Credential
+      - Vault Credentials
+    ask_tags_on_launch: true
+    job_tags: "level1-memberserver"
+
+# Windows 2019 -- CIS
+win2019_templates:
+
+  - name: JT - WIN 2019 CIS Harden
+    job_type: run
+    inventory: Workshop Windows
+    project: Git Compliance
+    playbook: soe-win2019-cis-hardenning.yml
+    labels: [compliance, windows]
+    credentials:
+      - Windows Credential
+      - Vault Credentials
+    ask_tags_on_launch: true
+    job_tags: "level1-memberserver"
+
+# Windows 2022 -- CIS
+win2022_templates:
+
+  - name: JT - WIN 2022 CIS Harden
+    job_type: run
+    inventory: Workshop Windows
+    project: Git Compliance
+    playbook: soe-win2022-cis-hardenning.yml
+    labels: [compliance, windows]
+    credentials:
+      - Windows Credential
+      - Vault Credentials
+    ask_tags_on_launch: true
+    job_tags: "level1-memberserver"
+
+# Windows 2025 -- CIS
+win2025_templates:
+
+  - name: JT - WIN 2025 CIS Harden
+    job_type: run
+    inventory: Workshop Windows
+    project: Git Compliance
+    playbook: soe-win2025-cis-hardenning.yml
+    labels: [compliance, windows]
+    credentials:
+      - Windows Credential
+      - Vault Credentials
+    ask_tags_on_launch: true
+    job_tags: "level1-memberserver"

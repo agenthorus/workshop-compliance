@@ -1,0 +1,8 @@
+---
+# tasks file for openscap-scanner
+
+- name: Install openscap scanner
+  include_tasks: 01-packages.yml
+
+- name: Perform an openscap scan
+  include_tasks: 02-scap-scan.yml

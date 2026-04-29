@@ -1,0 +1,18 @@
+---
+
+#- name: Run OpenSCAP Scanner with CIS Benchmark
+#  command: oscap xccdf eval \
+#    --profile {{ openscap_profile }} \
+#    --results-arf "{{ git_local_dir }}/oscap-arf-{{ v_hostname_fqdn }}-{{ ansible_date_time.iso8601 }}.xml" \
+#    --report "{{ git_local_dir }}/oscap-report-{{ v_hostname_fqdn }}-{{ ansible_date_time.iso8601 }}.html" \
+#    "{{ openscap_policy_path }}"  
+#  register: scan_result
+#  failed_when: scan_result.rc > 2 or scan_result.rc == 1 
+
+- name: Run OpenSCAP Scanner with {{ openscap_profile }} Benchmark
+  command: oscap xccdf eval \
+    --profile {{ openscap_profile }} \
+    --report "{{ git_local_dir }}/oscap-report-{{ ansible_nodename }}-{{ v_stage }}.html" \
+    "{{ openscap_policy_path }}"
+  register: scan_result
+  failed_when: scan_result.rc > 2 or scan_result.rc == 1

@@ -1,0 +1,10 @@
+---
+collections:
+  # CaC
+  - name: infra.aap_configuration
+  - name: ansible.platform
+
+  # Compliance playbook dependencies
+  - name: community.general
+  - name: ansible.windows
+  - name: community.windows

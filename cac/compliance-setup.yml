@@ -1,0 +1,183 @@
+---
+- name: Setup AAP Resources - Compliance Workshop
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  collections:
+    - infra.aap_configuration
+    - ansible.platform
+
+  pre_tasks:
+    - name: Import AAP resources blueprint
+      ansible.builtin.include_vars:
+        dir: aap-resources
+        extensions: ["yml"]
+        ignore_unknown_extensions: true
+      tags: [always]
+
+  vars_files:
+    - vars/common.yml
+    - vars/secrets.yml
+
+  tasks:
+
+    # ── Core resources (always deployed) ──
+
+    - name: Create Organization
+      ansible.platform.organization:
+        gateway_hostname: "{{ aap_hostname }}"
+        gateway_username: "{{ aap_username }}"
+        gateway_password: "{{ aap_password }}"
+        name: "{{ item.name }}"
+        validate_certs: "{{ aap_validate_certs | default(false) }}"
+        description: "{{ item.description | default('') }}"
+      loop: "{{ aap_organizations }}"
+      when: aap_organizations is defined
+      tags: [always]
+
+    - name: Create Credentials
+      ansible.builtin.include_role:
+        name: controller_credentials
+      when: controller_credentials is defined
+      no_log: true
+      tags: [always]
+
+    - name: Attach Galaxy credentials to Organization
+      ansible.builtin.include_role:
+        name: controller_organizations
+      when: aap_organizations is defined
+      tags: [always]
+
+    - name: Create inventories
+      ansible.builtin.include_role:
+        name: controller_inventories
+      when: controller_inventories is defined
+      tags: [always]
+
+    - name: Create hosts
+      ansible.builtin.include_role:
+        name: controller_hosts
+      when: controller_hosts is defined
+      tags: [always]
+
+    - name: Create Project
+      ansible.builtin.include_role:
+        name: controller_projects
+      when: controller_projects is defined
+      tags: [always]
+
+    - name: Sync Project
+      ansible.builtin.include_role:
+        name: controller_project_update
+      when: controller_projects is defined
+      tags: [always]
+
+    - name: Create Labels
+      ansible.builtin.include_role:
+        name: controller_labels
+      when: controller_labels is defined
+      tags: [always]
+
+    # ── RHEL scan templates (shared across all RHEL profiles) ──
+
+    - name: Create RHEL Scan templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ rhel_scan_templates }}"
+      when: rhel_scan_templates is defined
+      tags: [rhel8, rhel9, rhel10]
+
+    # ── RHEL 8 ──
+
+    - name: Create RHEL 8 templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ rhel8_templates }}"
+      when: rhel8_templates is defined
+      tags: [rhel8]
+
+    - name: Create RHEL 8 workflows
+      ansible.builtin.include_role:
+        name: controller_workflow_job_templates
+      vars:
+        controller_workflows: "{{ rhel8_workflows }}"
+      when: rhel8_workflows is defined
+      tags: [rhel8]
+
+    # ── RHEL 9 ──
+
+    - name: Create RHEL 9 templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ rhel9_templates }}"
+      when: rhel9_templates is defined
+      tags: [rhel9]
+
+    - name: Create RHEL 9 workflows
+      ansible.builtin.include_role:
+        name: controller_workflow_job_templates
+      vars:
+        controller_workflows: "{{ rhel9_workflows }}"
+      when: rhel9_workflows is defined
+      tags: [rhel9]
+
+    # ── RHEL 10 ──
+
+    - name: Create RHEL 10 templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ rhel10_templates }}"
+      when: rhel10_templates is defined
+      tags: [rhel10]
+
+    - name: Create RHEL 10 workflows
+      ansible.builtin.include_role:
+        name: controller_workflow_job_templates
+      vars:
+        controller_workflows: "{{ rhel10_workflows }}"
+      when: rhel10_workflows is defined
+      tags: [rhel10]
+
+    # ── Windows 2016 ──
+
+    - name: Create WIN 2016 templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ win2016_templates }}"
+      when: win2016_templates is defined
+      tags: [win2016]
+
+    # ── Windows 2019 ──
+
+    - name: Create WIN 2019 templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ win2019_templates }}"
+      when: win2019_templates is defined
+      tags: [win2019]
+
+    # ── Windows 2022 ──
+
+    - name: Create WIN 2022 templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ win2022_templates }}"
+      when: win2022_templates is defined
+      tags: [win2022]
+
+    # ── Windows 2025 ──
+
+    - name: Create WIN 2025 templates
+      ansible.builtin.include_role:
+        name: controller_job_templates
+      vars:
+        controller_templates: "{{ win2025_templates }}"
+      when: win2025_templates is defined
+      tags: [win2025]

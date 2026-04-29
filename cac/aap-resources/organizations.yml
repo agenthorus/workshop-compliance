@@ -1,0 +1,9 @@
+---
+aap_organizations:
+  - name: "{{ v_organization_name | default('Default') }}"
+    description: Compliance Workshop — RHEL and Windows security hardening with OpenSCAP
+    galaxy_credentials:
+      - Automation Hub Credentials
+      - Galaxy Credentials
+
+assign_galaxy_credentials_to_org: true

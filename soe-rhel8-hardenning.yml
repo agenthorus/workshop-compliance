@@ -1,0 +1,13 @@
+---
+- name: Apply CIS Benchmark compliance hardening - RHEL 8
+  hosts: all
+  become: true
+  become_method: sudo
+  vars:
+    rhel_version: "8"
+
+  tasks:
+    - name: Apply RHEL {{ rhel_version }} CIS Compliance Hardening
+      ansible.builtin.include_role:
+        name: "rhel{{ rhel_version }}-cis"
+        tasks_from: "rhel{{ rhel_version }}-playbook-cis.yml"

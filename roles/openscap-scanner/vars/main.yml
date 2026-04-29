@@ -1,0 +1,26 @@
+---
+# vars file for openscap-scanner
+v_hostname_fqdn: "{{ ansible_hostname }}"
+git_local_dir: '/tmp/'
+
+v_openscap_packages:
+  - openscap-scanner
+  - scap-security-guide
+
+openscap_policy: ssg-rhel{{ ansible_distribution_major_version }}-ds
+openscap_policy_path: "/usr/share/xml/scap/ssg/content/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml"
+
+
+##############
+#openscap_policy_path: "/home/{{ var_prov_user }}/{{ openscap_policy }}.xml"
+#openscap_policy_path: "/usr/share/xml/scap/ssg/content/{{ openscap_policy }}.xml"
+#openscap_tailoring_path: '/etc/foreman_scap_client/ssg-rhel8-ds-tailoring-TPG.xml'
+
+#git_remotes:
+#  prod_eosp: 'git@gitlab.vodafone.com.au:mina/tpg_soe_compliance_reports.git'
+#  nonprod_eosp: 'git@gitlab-npe.vodafone.com.au:mina/tpg_scap_security_report.git'
+#git_remote: "{{ git_remotes[var_environment + '_' + var_cloud_provider] }}"
+
+#git_local_dir: '/tmp/scap_reports_repo'
+#git_branch: 'master'
+
